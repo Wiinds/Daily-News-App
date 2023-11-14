@@ -1,5 +1,7 @@
 import requests
-
+#import smtplib, ssl
+#import os 
+from send_email import send_email 
 
 
 api_key = "5dc27eea6fef477a92581918563993b8"
@@ -13,11 +15,18 @@ request = requests.get(url)
 content = request.json()
 
 # Access each article titles 
+body = ""
 for article in content["articles"]:
-    print(article["title"])
+    if article["title"] is not None:
+        body = body + article["title"] + "\n" + article["description"] + 2*"\n"
+        send_email(body)
     
-
-
-
+    
+    #print(article["title"])
+    
+    
+    
+    
+    
 
 
